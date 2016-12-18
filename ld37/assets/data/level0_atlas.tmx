@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="64" tileheight="64" nextobjectid="1">
+ <tileset firstgid="1" source="tileset.tsx"/>
+ <tileset firstgid="15" name="entities" tilewidth="64" tileheight="64" tilecount="17" columns="0">
+  <tile id="0">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_01.png"/>
+  </tile>
+  <tile id="1">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_02.png"/>
+  </tile>
+  <tile id="2">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_03.png"/>
+  </tile>
+  <tile id="3">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_04.png"/>
+  </tile>
+  <tile id="4">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_05.png"/>
+  </tile>
+  <tile id="5">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_06.png"/>
+  </tile>
+  <tile id="6">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_07.png"/>
+  </tile>
+  <tile id="7">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_08.png"/>
+  </tile>
+  <tile id="8">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_09.png"/>
+  </tile>
+  <tile id="9">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_10.png"/>
+  </tile>
+  <tile id="10">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_11.png"/>
+  </tile>
+  <tile id="11">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_12.png"/>
+  </tile>
+  <tile id="12">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_13.png"/>
+  </tile>
+  <tile id="13">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_14.png"/>
+  </tile>
+  <tile id="14">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_15.png"/>
+  </tile>
+  <tile id="15">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_16.png"/>
+  </tile>
+  <tile id="16">
+   <image width="64" height="64" source="../../../art/entities/images/entities_00_17.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="32" name="edges" tilewidth="64" tileheight="64" tilecount="21" columns="0">
+  <tile id="39">
+   <image width="64" height="64" source="../../../art/edges/edge_b.png"/>
+  </tile>
+  <tile id="40">
+   <image width="64" height="64" source="../../../art/edges/edge_bl.png"/>
+  </tile>
+  <tile id="41">
+   <image width="64" height="64" source="../../../art/edges/edge_br.png"/>
+  </tile>
+  <tile id="42">
+   <image width="64" height="64" source="../../../art/edges/edge_hb.png"/>
+  </tile>
+  <tile id="43">
+   <image width="64" height="64" source="../../../art/edges/edge_hbl.png"/>
+  </tile>
+  <tile id="44">
+   <image width="64" height="64" source="../../../art/edges/edge_hbr.png"/>
+  </tile>
+  <tile id="45">
+   <image width="64" height="64" source="../../../art/edges/edge_hl.png"/>
+  </tile>
+  <tile id="46">
+   <image width="64" height="64" source="../../../art/edges/edge_hr.png"/>
+  </tile>
+  <tile id="47">
+   <image width="64" height="64" source="../../../art/edges/edge_ht.png"/>
+  </tile>
+  <tile id="48">
+   <image width="64" height="64" source="../../../art/edges/edge_htl.png"/>
+  </tile>
+  <tile id="49">
+   <image width="64" height="64" source="../../../art/edges/edge_htr.png"/>
+  </tile>
+  <tile id="50">
+   <image width="64" height="64" source="../../../art/edges/edge_l.png"/>
+  </tile>
+  <tile id="51">
+   <image width="64" height="64" source="../../../art/edges/edge_r.png"/>
+  </tile>
+  <tile id="52">
+   <image width="64" height="64" source="../../../art/edges/edge_t.png"/>
+  </tile>
+  <tile id="53">
+   <image width="64" height="64" source="../../../art/edges/edge_tip_bl.png"/>
+  </tile>
+  <tile id="54">
+   <image width="64" height="64" source="../../../art/edges/edge_tip_br.png"/>
+  </tile>
+  <tile id="55">
+   <image width="64" height="64" source="../../../art/edges/edge_tip_tl.png"/>
+  </tile>
+  <tile id="56">
+   <image width="64" height="64" source="../../../art/edges/edge_tip_tr.png"/>
+  </tile>
+  <tile id="57">
+   <image width="64" height="64" source="../../../art/edges/edge_tl.png"/>
+  </tile>
+  <tile id="58">
+   <image width="64" height="64" source="../../../art/edges/edge_tr.png"/>
+  </tile>
+  <tile id="59">
+   <image width="64" height="64" source="../../../art/edges/void.png"/>
+  </tile>
+ </tileset>
+ <layer name="base" width="12" height="12">
+  <properties>
+   <property name="tileset" value="tileset"/>
+   <property name="type" value="base"/>
+  </properties>
+  <data encoding="base64">
+   CQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAwAAAANAAAADAAAAA0AAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAA0AAAAMAAAADQAAAAwAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAwAAAANAAAADAAAAA0AAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAA0AAAAMAAAADQAAAAwAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAACQAAAAkAAAAJAAAA
+  </data>
+ </layer>
+ <layer name="left" width="12" height="12" visible="0">
+  <properties>
+   <property name="edge" value="left"/>
+   <property name="tileset" value="tileset"/>
+   <property name="type" value="edges"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <layer name="right" width="12" height="12" visible="0">
+  <properties>
+   <property name="edge" value="right"/>
+   <property name="tileset" value="tileset"/>
+   <property name="type" value="edges"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <layer name="top" width="12" height="12" visible="0">
+  <properties>
+   <property name="edge" value="top"/>
+   <property name="tileset" value="tileset"/>
+   <property name="type" value="edges"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <layer name="bottom" width="12" height="12" visible="0">
+  <properties>
+   <property name="edge" value="bottom"/>
+   <property name="tileset" value="tileset"/>
+   <property name="type" value="edges"/>
+  </properties>
+  <data encoding="base64">
+   AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+  </data>
+ </layer>
+ <layer name="edges" width="12" height="12">
+  <data encoding="base64">
+   WwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAAWwAAAFsAAABbAAAA
+  </data>
+ </layer>
+</map>
