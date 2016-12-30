@@ -169,7 +169,7 @@ ApplicationMain.init = function() {
 	if(total == 0) ApplicationMain.start();
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1116", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
+	ApplicationMain.config = { build : "1119", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
