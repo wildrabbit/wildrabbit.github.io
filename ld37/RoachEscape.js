@@ -51,6 +51,8 @@ ApplicationMain.create = function() {
 	types.push("TEXT");
 	urls.push("04b03");
 	types.push("FONT");
+	urls.push("assets/images/bg_howto.png");
+	types.push("IMAGE");
 	urls.push("assets/images/build.png");
 	types.push("IMAGE");
 	urls.push("assets/images/clear.png");
@@ -95,7 +97,13 @@ ApplicationMain.create = function() {
 	types.push("IMAGE");
 	urls.push("assets/images/playerTrail.png");
 	types.push("IMAGE");
+	urls.push("assets/images/popup_deco.png");
+	types.push("IMAGE");
 	urls.push("assets/images/reset_btn.png");
+	types.push("IMAGE");
+	urls.push("assets/images/roachie_lose.png");
+	types.push("IMAGE");
+	urls.push("assets/images/roachie_win.png");
 	types.push("IMAGE");
 	urls.push("assets/images/screen_pause.png");
 	types.push("IMAGE");
@@ -179,7 +187,7 @@ ApplicationMain.init = function() {
 	if(total == 0) ApplicationMain.start();
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1423", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
+	ApplicationMain.config = { build : "1560", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -1683,6 +1691,9 @@ var DefaultAssetLibrary = function() {
 	id = "assets/fonts/small_text.TTF";
 	this.className.set(id,_$_$ASSET_$_$assets_$fonts_$small_$text_$ttf);
 	this.type.set(id,"FONT");
+	id = "assets/images/bg_howto.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
 	id = "assets/images/build.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
@@ -1749,7 +1760,16 @@ var DefaultAssetLibrary = function() {
 	id = "assets/images/playerTrail.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
+	id = "assets/images/popup_deco.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
 	id = "assets/images/reset_btn.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/images/roachie_lose.png";
+	this.path.set(id,id);
+	this.type.set(id,"IMAGE");
+	id = "assets/images/roachie_win.png";
 	this.path.set(id,id);
 	this.type.set(id,"IMAGE");
 	id = "assets/images/screen_pause.png";
@@ -64833,8 +64853,269 @@ org_wildrabbit_roach_states_EndState.prototype = $extend(flixel_FlxState.prototy
 	}
 	,__class__: org_wildrabbit_roach_states_EndState
 });
+var org_wildrabbit_roach_states_HowtoState = function(MaxSize) {
+	this.textY = [192];
+	this.textX = [290];
+	flixel_FlxState.call(this,MaxSize);
+};
+$hxClasses["org.wildrabbit.roach.states.HowtoState"] = org_wildrabbit_roach_states_HowtoState;
+org_wildrabbit_roach_states_HowtoState.__name__ = ["org","wildrabbit","roach","states","HowtoState"];
+org_wildrabbit_roach_states_HowtoState.__super__ = flixel_FlxState;
+org_wildrabbit_roach_states_HowtoState.prototype = $extend(flixel_FlxState.prototype,{
+	create: function() {
+		flixel_FlxState.prototype.create.call(this);
+		this.bg = new flixel_FlxSprite(0,0,"assets/images/bg_howto.png");
+		this.add(this.bg);
+		this.title = new flixel_text_FlxText(312,36,400,"HOW TO PLAY",36);
+		this.title.set_alignment("center");
+		this.add(this.title);
+		this.delay = 0.8;
+		this.startStage1();
+	}
+	,destroy: function() {
+		flixel_FlxState.prototype.destroy.call(this);
+	}
+	,update: function(dt) {
+		flixel_FlxState.prototype.update.call(this,dt);
+		if(this.delay >= 0) this.delay -= dt; else {
+			if(this.skipText == null) {
+				this.skipText = new flixel_text_FlxText(700,700,368,"Press any key to skip...",20);
+				this.skipText.set_font("assets/fonts/small_text.TTF");
+				this.skipText.set_color(-1);
+				flixel_tweens_FlxTween.color(this.skipText,0.8,-1,-16777216,{ type : 4});
+				this.add(this.skipText);
+			}
+			if(flixel_FlxG.keys.justPressed.get_ANY() || flixel_FlxG.mouse._leftButton.current == 2) this.finishHowto();
+		}
+	}
+	,startStage1: function() {
+		var _g = this;
+		var introRoachieCB = function(t) {
+			_g.roachie = new flixel_FlxSprite(318,224);
+			_g.roachie.loadGraphic("assets/images/entities_00.png",true,64,64,false);
+			_g.roachie._facingFlip.h[1] = { x : true, y : false};
+			_g.roachie._facingFlip.h[16] = { x : false, y : false};
+			_g.roachie._facingFlip.h[256] = { x : false, y : false};
+			_g.roachie._facingFlip.h[4096] = { x : false, y : true};
+			_g.roachie.animation.add("horizontal",[1],1,false);
+			_g.roachie.animation.add("vertical",[0],1,false);
+			_g.roachie.animation.play("horizontal");
+			_g.add(_g.roachie);
+			_g.seqTimer.start(0.4,$bind(_g,_g.startStage2));
+		};
+		this.seqTimer = new flixel_util_FlxTimer().start(0.5,introRoachieCB);
+	}
+	,startStage2: function(t) {
+		this.text = new flixel_text_FlxText(290,192,300,"Hi ! I'm Roachie!",20);
+		this.text.set_font("assets/fonts/small_text.TTF");
+		this.text.set_color(-1);
+		this.add(this.text);
+		this.seqTimer.start(0.8,$bind(this,this.startStage3));
+	}
+	,startStage3: function(t) {
+		var _g = this;
+		this.text.setPosition(62,364);
+		this.text.set_alignment("right");
+		this.text.set_text("I need to get here\n=>");
+		this.goal = new flixel_FlxSprite(388,352);
+		this.goal.loadGraphic("assets/images/entities_00.png",true,64,64,false);
+		this.goal.animation.add("goal",[15],1,false);
+		this.goal.animation.play("goal");
+		this.add(this.goal);
+		var showText3 = function(t1) {
+			_g.text.setPosition(290,192);
+			_g.text.set_alignment("center");
+			_g.text.set_text("I'm fast!");
+			_g.tween = flixel_tweens_FlxTween.tween(_g.roachie,{ x : 640, y : 224},1.5,{ onComplete : $bind(_g,_g.startStage4)});
+		};
+		this.seqTimer = new flixel_util_FlxTimer().start(1,showText3);
+	}
+	,startStage4: function(t) {
+		this.roachie.set_facing(4096);
+		this.roachie.animation.play("vertical");
+		this.text.setPosition(730,220);
+		this.text.set_alignment("left");
+		this.text.set_text("...and when I bump\nI always turn right");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 640, y : 484},1.5,{ onComplete : $bind(this,this.startStage5)});
+	}
+	,startStage5: function(t) {
+		this.text.setPosition(730,500);
+		this.text.set_alignment("left");
+		this.text.set_text("...and right");
+		this.roachie.set_facing(1);
+		this.roachie.animation.play("horizontal");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 444, y : 484},1.5,{ onComplete : $bind(this,this.startStage6)});
+	}
+	,startStage6: function(t) {
+		var _g = this;
+		this.text.setPosition(120,518);
+		this.text.set_alignment("right");
+		this.text.set_text("...and right!");
+		var showText7 = function(t1) {
+			_g.text.setPosition(522,364);
+			_g.text.set_alignment("left");
+			_g.text.set_text("Getting close now\n:)");
+		};
+		this.seqTimer.start(0.4,showText7);
+		this.roachie.set_facing(256);
+		this.roachie.animation.play("vertical");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 444, y : 354},1.0,{ onComplete : $bind(this,this.startStage7)});
+	}
+	,startStage7: function(t) {
+		this.text.setPosition(522,364);
+		this.text.set_alignment("left");
+		this.text.set_text("Whoa!");
+		this.roachie.set_facing(4096);
+		this.roachie.animation.play("vertical");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 444, y : 484},0.8);
+		this.seqTimer.start(0.3,$bind(this,this.startStage8),1);
+	}
+	,startStage8: function(t) {
+		this.text.set_text("Not that way");
+		this.seqTimer.start(1,$bind(this,this.startStage9));
+	}
+	,startStage9: function(t) {
+		var _g = this;
+		this.text.setPosition(460,560);
+		this.text.set_text(":(");
+		var showText11 = function(t1) {
+			_g.text.set_text("Guess I'm going to need your help");
+			_g.seqTimer.start(1.5,$bind(_g,_g.startStage10));
+		};
+		this.seqTimer.start(0.7,showText11);
+	}
+	,startStage10: function(t) {
+		this.roachie.setPosition(322,224);
+		this.text.setPosition(290,192);
+		this.text.set_text("Let's go into \"Edit mode\"");
+		this.roachie.set_facing(16);
+		this.roachie.animation.play("horizontal");
+		this.seqTimer.start(1.0,$bind(this,this.startStage11));
+	}
+	,startStage11: function(t) {
+		this.tile = new flixel_FlxSprite(440,120);
+		this.tile.loadGraphic("assets/images/entities_00.png",true,64,64,false);
+		this.tile.animation.add("tile",[10],1,false);
+		this.tile.animation.play("tile");
+		this.add(this.tile);
+		this.text.set_text("See that tile?");
+		this.seqTimer.start(0.6,$bind(this,this.startStage12));
+	}
+	,startStage12: function(t) {
+		this.text.set_text("Tiles are neat!");
+		this.seqTimer.start(0.6,$bind(this,this.startStage13));
+	}
+	,startStage13: function(t) {
+		this.text.set_text("Tiles are neat!");
+		this.seqTimer.start(0.6,$bind(this,this.startStage14));
+	}
+	,startStage14: function(t) {
+		this.tile.setPosition(450,354);
+		var _g = this.text;
+		_g.set_y(_g.y - 16);
+		this.text.set_text("When I step on them I'll change direction");
+		this.seqTimer.start(1,$bind(this,this.startStage15));
+	}
+	,startStage15: function(t) {
+		this.text.set_text("Let's try again, shall we?");
+		this.seqTimer.start(0.8,$bind(this,this.startStage16));
+	}
+	,startStage16: function(t) {
+		var r = flixel_math_FlxRect.get(440,100,68,68);
+		this.playButton = new org_wildrabbit_ui_ActionButton(r.x,r.y);
+		this.playButton.build(r,(function($this) {
+			var $r;
+			var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color &= -16711681;
+					color |= 8519680;
+					130;
+				}
+				{
+					color &= -65281;
+					color |= 0;
+					0;
+				}
+				{
+					color &= -256;
+					color |= 37;
+					37;
+				}
+				{
+					color &= 16777215;
+					color |= -16777216;
+					255;
+				}
+				$r = color;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/play.png",null);
+		this.add(this.playButton);
+		this.text.set_text("The \"Play\" button will get me moving again");
+		this.seqTimer.start(0.8,$bind(this,this.startStage17));
+	}
+	,startStage17: function(t) {
+		this.text.set_text("Here we go!");
+		this.remove(this.roachie);
+		this.remove(this.tile);
+		this.add(this.tile);
+		this.add(this.roachie);
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 640, y : 224},1.5,{ onComplete : $bind(this,this.startStage18)});
+	}
+	,startStage18: function(t) {
+		this.text.set_text("Blazing fast!");
+		this.roachie.set_facing(4096);
+		this.roachie.animation.play("vertical");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 640, y : 484},1.0,{ onComplete : $bind(this,this.startStage19)});
+	}
+	,startStage19: function(t) {
+		this.remove(this.playButton);
+		this.roachie.set_facing(1);
+		this.roachie.animation.play("horizontal");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 444, y : 484},0.8,{ onComplete : $bind(this,this.startStage20)});
+	}
+	,startStage20: function(t) {
+		this.text.setPosition(120,518);
+		this.text.set_alignment("right");
+		this.text.set_text("Okay...let's see what happens now");
+		this.roachie.set_facing(256);
+		this.roachie.animation.play("vertical");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 444, y : 354},0.6,{ onComplete : $bind(this,this.startStage21)});
+	}
+	,startStage21: function(t) {
+		this.text.setPosition(522,364);
+		this.text.set_alignment("left");
+		this.text.set_text("Yay!");
+		this.roachie.set_facing(1);
+		this.roachie.animation.play("horizontal");
+		this.tween = flixel_tweens_FlxTween.tween(this.roachie,{ x : 388, y : 352},0.4,{ onComplete : $bind(this,this.startStage22)});
+	}
+	,startStage22: function(t) {
+		this.text.setPosition(120,518);
+		this.text.set_alignment("right");
+		this.text.set_text("These are the basics, but there'll be more surprises.");
+		this.seqTimer.start(0.8,$bind(this,this.startStage23));
+	}
+	,startStage23: function(t) {
+		this.text.set_text("Get me through all the levels!");
+		this.seqTimer.start(0.8,$bind(this,this.finishHowto));
+	}
+	,finishHowto: function(t) {
+		org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx = org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx = 0;
+		org_wildrabbit_roach_Reg.currentWorld = org_wildrabbit_roach_Reg.worldDatabase.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx];
+		org_wildrabbit_roach_Reg.currentLevel = org_wildrabbit_roach_Reg.currentWorld.levels[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
+		flixel_FlxG.sound.play("assets/sounds/play.wav");
+		flixel_FlxG.switchState(new org_wildrabbit_roach_states_PlayState());
+	}
+	,__class__: org_wildrabbit_roach_states_HowtoState
+});
 var org_wildrabbit_roach_states_MenuState = function(MaxSize) {
 	this.delay = 0.8;
+	this.version = null;
+	this.continueText = null;
 	this.msg = null;
 	flixel_FlxState.call(this,MaxSize);
 };
@@ -64846,6 +65127,8 @@ org_wildrabbit_roach_states_MenuState.prototype = $extend(flixel_FlxState.protot
 		flixel_FlxState.prototype.create.call(this);
 		this.cover = new flixel_FlxSprite(0,0,"assets/images/menu.jpg");
 		this.add(this.cover);
+		this.version = new flixel_text_FlxText(0,742,400,"LD37 Post-compo - Ithildin",24);
+		this.add(this.version);
 	}
 	,destroy: function() {
 		flixel_FlxState.prototype.destroy.call(this);
@@ -64853,18 +65136,19 @@ org_wildrabbit_roach_states_MenuState.prototype = $extend(flixel_FlxState.protot
 	,update: function(dt) {
 		flixel_FlxState.prototype.update.call(this,dt);
 		if(this.delay >= 0) this.delay -= dt; else {
-			if(this.msg == null) {
-				this.msg = new flixel_FlxSprite(166,148,"assets/images/start.png");
-				this.add(this.msg);
-				this.t = flixel_tweens_FlxTween.tween(this.msg.scale,{ x : 1.15, y : 1.15},0.7,{ type : 4});
+			if(this.continueText == null) {
+				this.continueText = new flixel_text_FlxText(700,746,368,"Press any key to continue...",20);
+				this.continueText.set_font("assets/fonts/small_text.TTF");
+				this.continueText.set_color(-1);
+				flixel_tweens_FlxTween.color(this.continueText,0.8,-1,-16777216,{ type : 4});
+				this.add(this.continueText);
 			}
 			if(flixel_FlxG.keys.justPressed.get_ANY() || flixel_FlxG.mouse._leftButton.current == 2) {
-				this.t.cancel();
 				org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx = org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx = 0;
 				org_wildrabbit_roach_Reg.currentWorld = org_wildrabbit_roach_Reg.worldDatabase.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx];
 				org_wildrabbit_roach_Reg.currentLevel = org_wildrabbit_roach_Reg.currentWorld.levels[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
 				flixel_FlxG.sound.play("assets/sounds/play.wav");
-				flixel_FlxG.switchState(new org_wildrabbit_roach_states_PlayState());
+				flixel_FlxG.switchState(new org_wildrabbit_roach_states_HowtoState());
 			}
 		}
 	}
@@ -65279,6 +65563,7 @@ org_wildrabbit_roach_states_PlayState.prototype = $extend(flixel_FlxState.protot
 				haxe_Log.trace("YAY WON",{ fileName : "PlayState.hx", lineNumber : 611, className : "org.wildrabbit.roach.states.PlayState", methodName : "setStageMode"});
 				var worldTable = org_wildrabbit_roach_Reg.gameWorld.worldTable.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx];
 				var levelState = worldTable.levelObjectiveTable.h[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
+				var victoryPopupInfo = [];
 				var objectives = org_wildrabbit_roach_Reg.currentLevel.objectives;
 				var idx = 0;
 				var _g6 = 0;
@@ -65338,21 +65623,22 @@ org_wildrabbit_roach_states_PlayState.prototype = $extend(flixel_FlxState.protot
 						objectiveState.completed = true;
 						var revealed = idx < 2 || objectiveState.completed || levelState.objectives[idx - 1].completed;
 						this.hud.playPanel.setGoalRevealed(idx,revealed,objectiveState.completed);
+						victoryPopupInfo.push(idx);
 					}
 					objectiveState.bestValue = bestInt;
 					objectiveState.bestFloat = bestFloat;
 					objectiveState.bestSequence.splice(0,objectiveState.bestSequence.length - 1);
 					objectiveState.bestSequence = bestSequence.slice();
-					haxe_Log.trace("Processed obj " + (idx == null?"null":"" + idx),{ fileName : "PlayState.hx", lineNumber : 689, className : "org.wildrabbit.roach.states.PlayState", methodName : "setStageMode"});
+					haxe_Log.trace("Processed obj " + (idx == null?"null":"" + idx),{ fileName : "PlayState.hx", lineNumber : 690, className : "org.wildrabbit.roach.states.PlayState", methodName : "setStageMode"});
 					idx++;
 				}
 				var popup = new org_wildrabbit_ui_VictoryPopup();
 				this.add(popup);
-				popup.start();
+				popup.start(victoryPopupInfo);
 			} else {
 				var popup1 = new org_wildrabbit_ui_DefeatPopup();
 				this.add(popup1);
-				popup1.start();
+				popup1.start(this.result);
 			}
 			org_wildrabbit_roach_Reg.gameWorld.save();
 			break;
@@ -65480,82 +65766,12 @@ var org_wildrabbit_ui_DefeatPopup = function() {
 	this.popupBg = new flixel_FlxSprite(128,176);
 	this.popupBg.makeGraphic(512,416,-16777216);
 	this.container.add(this.popupBg);
+	this.popupDeco = new flixel_FlxSprite(128,310,"assets/images/popup_deco.png");
+	this.container.add(this.popupDeco);
+	this.roachie = new flixel_FlxSprite(352,310,"assets/images/roachie_lose.png");
 	this.title = new flixel_text_FlxText(128,212,512,"Keep trying!!",48);
 	this.title.set_alignment("center");
-	this.container.add(this.title);
 	this.buttons = [];
-	var btnStart = new flixel_math_FlxPoint(230,508);
-	var btnWidth = 146;
-	var btnHeight = 56;
-	var btnSpace = 16;
-	var _g = 0;
-	while(_g < 2) {
-		var i = _g++;
-		this.buttons.push(new org_wildrabbit_ui_ActionButton(btnStart.x,btnStart.y));
-		var _g1 = btnStart;
-		_g1.set_x(_g1.x + (btnWidth + btnSpace));
-		this.container.add(this.buttons[this.buttons.length - 1]);
-	}
-	this.buttons[0].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
-		var $r;
-		var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
-		$r = (function($this) {
-			var $r;
-			{
-				color &= -16711681;
-				color |= 8519680;
-				130;
-			}
-			{
-				color &= -65281;
-				color |= 0;
-				0;
-			}
-			{
-				color &= -256;
-				color |= 37;
-				37;
-			}
-			{
-				color &= 16777215;
-				color |= -16777216;
-				255;
-			}
-			$r = color;
-			return $r;
-		}($this));
-		return $r;
-	}(this)),"assets/images/build.png",$bind(this,this.onEditClick));
-	this.buttons[1].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
-		var $r;
-		var color1 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
-		$r = (function($this) {
-			var $r;
-			{
-				color1 &= -16711681;
-				color1 |= 8519680;
-				130;
-			}
-			{
-				color1 &= -65281;
-				color1 |= 0;
-				0;
-			}
-			{
-				color1 &= -256;
-				color1 |= 37;
-				37;
-			}
-			{
-				color1 &= 16777215;
-				color1 |= -16777216;
-				255;
-			}
-			$r = color1;
-			return $r;
-		}($this));
-		return $r;
-	}(this)),"assets/images/menu.png",$bind(this,this.onMenuClick));
 };
 $hxClasses["org.wildrabbit.ui.DefeatPopup"] = org_wildrabbit_ui_DefeatPopup;
 org_wildrabbit_ui_DefeatPopup.__name__ = ["org","wildrabbit","ui","DefeatPopup"];
@@ -65569,11 +65785,97 @@ org_wildrabbit_ui_DefeatPopup.prototype = $extend(flixel_group_FlxTypedSpriteGro
 		}});
 	}
 	,onMenuClick: function() {
-		haxe_Log.trace("Menu!",{ fileName : "DefeatPopup.hx", lineNumber : 93, className : "org.wildrabbit.ui.DefeatPopup", methodName : "onMenuClick"});
+		haxe_Log.trace("Menu!",{ fileName : "DefeatPopup.hx", lineNumber : 81, className : "org.wildrabbit.ui.DefeatPopup", methodName : "onMenuClick"});
 	}
-	,start: function() {
-		this.container.scale.set(0.25,0.25);
-		var t = flixel_tweens_FlxTween.tween(this.container.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut, onComplete : null});
+	,start: function(result) {
+		this.popupBg.scale.set(0.25,0.25);
+		var t = flixel_tweens_FlxTween.tween(this.popupBg.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut, onComplete : $bind(this,this.onIntroAnimFinished)});
+		this.popupDeco.scale.set(0.25,0.25);
+		var t1 = flixel_tweens_FlxTween.tween(this.popupDeco.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut});
+		this.popupInfo = new flixel_text_FlxText(184,400,400,this.getDefeatText(result),32);
+		this.popupInfo.set_color(-1);
+		this.popupInfo.set_font("assets/fonts/small_text.TTF");
+		this.popupInfo.set_alignment("center");
+	}
+	,onIntroAnimFinished: function(t) {
+		this.container.add(this.title);
+		this.container.add(this.roachie);
+		this.container.add(this.popupInfo);
+		var btnStart = new flixel_math_FlxPoint(230,508);
+		var btnWidth = 146;
+		var btnHeight = 56;
+		var btnSpace = 16;
+		var _g = 0;
+		while(_g < 2) {
+			var i = _g++;
+			this.buttons.push(new org_wildrabbit_ui_ActionButton(btnStart.x,btnStart.y));
+			var _g1 = btnStart;
+			_g1.set_x(_g1.x + (btnWidth + btnSpace));
+			this.container.add(this.buttons[this.buttons.length - 1]);
+		}
+		this.buttons[0].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
+			var $r;
+			var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color &= -16711681;
+					color |= 8519680;
+					130;
+				}
+				{
+					color &= -65281;
+					color |= 0;
+					0;
+				}
+				{
+					color &= -256;
+					color |= 37;
+					37;
+				}
+				{
+					color &= 16777215;
+					color |= -16777216;
+					255;
+				}
+				$r = color;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/build.png",$bind(this,this.onEditClick));
+		this.buttons[1].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
+			var $r;
+			var color1 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color1 &= -16711681;
+					color1 |= 8388608;
+					128;
+				}
+				{
+					color1 &= -65281;
+					color1 |= 32768;
+					128;
+				}
+				{
+					color1 &= -256;
+					color1 |= 128;
+					128;
+				}
+				{
+					color1 &= 16777215;
+					color1 |= -16777216;
+					255;
+				}
+				$r = color1;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/menu.png",$bind(this,this.onMenuClick));
+	}
+	,getDefeatText: function(result) {
+		if(result == org_wildrabbit_roach_states_Result.DIED) return "You died!"; else if(result == org_wildrabbit_roach_states_Result.TIMEDOUT) return "What took you so long?"; else return "";
 	}
 	,__class__: org_wildrabbit_ui_DefeatPopup
 });
@@ -65660,7 +65962,7 @@ var org_wildrabbit_ui_EditModePanel = function(parent) {
 	this.add(this.toolsText);
 	this.playButton = this.initButton(config.playRect,$bind(this,this.onPlayButton),config.buttonColour,"assets/images/play.png");
 	this.clearButton = this.initButton(config.clearRect,$bind(this,this.onClearButton),config.buttonColour,"assets/images/clear.png");
-	this.menuButton = this.initButton(config.menuRect,$bind(this,this.onMenuButton),config.buttonColour,"assets/images/menu.png");
+	this.menuButton = this.initButton(config.menuRect,$bind(this,this.onMenuButton),-8355712,"assets/images/menu.png");
 	this.tilesPage = new org_wildrabbit_ui_pages_TilesPage(parent,config);
 	this.goalsPage = new org_wildrabbit_ui_pages_GoalsPage(parent);
 	this.settingsPage = new org_wildrabbit_ui_pages_SettingsPage(parent);
@@ -66262,6 +66564,9 @@ var org_wildrabbit_ui_UIAtlasNames = function() { };
 $hxClasses["org.wildrabbit.ui.UIAtlasNames"] = org_wildrabbit_ui_UIAtlasNames;
 org_wildrabbit_ui_UIAtlasNames.__name__ = ["org","wildrabbit","ui","UIAtlasNames"];
 var org_wildrabbit_ui_VictoryPopup = function() {
+	this.currentGoal = -1;
+	this.init = false;
+	this.clippingRect = flixel_math_FlxRect.get(148,176,512,416);
 	flixel_group_FlxTypedSpriteGroup.call(this,0,0);
 	this.bgLayer = new flixel_FlxSprite(0,0);
 	this.bgLayer.makeGraphic(flixel_FlxG.width,flixel_FlxG.height,-2147483648);
@@ -66271,118 +66576,44 @@ var org_wildrabbit_ui_VictoryPopup = function() {
 	this.popupBg = new flixel_FlxSprite(148,176);
 	this.popupBg.makeGraphic(512,416,-16777216);
 	this.container.add(this.popupBg);
+	this.popupDeco = new flixel_FlxSprite(148,310,"assets/images/popup_deco.png");
+	this.container.add(this.popupDeco);
 	this.title = new flixel_text_FlxText(266,212,278,"You win!!",48);
 	this.title.set_alignment("center");
 	this.container.add(this.title);
+	this.newGoals = [];
 	this.buttons = [];
-	var btnStart = new flixel_math_FlxPoint(174,508);
-	var btnWidth = 146;
-	var btnHeight = 56;
-	var btnSpace = 8;
-	var _g = 0;
-	while(_g < 3) {
-		var i = _g++;
-		this.buttons.push(new org_wildrabbit_ui_ActionButton(btnStart.x,btnStart.y));
-		var _g1 = btnStart;
-		_g1.set_x(_g1.x + (btnWidth + btnSpace));
-		this.container.add(this.buttons[this.buttons.length - 1]);
-	}
-	this.buttons[0].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
-		var $r;
-		var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
-		$r = (function($this) {
-			var $r;
-			{
-				color &= -16711681;
-				color |= 8519680;
-				130;
-			}
-			{
-				color &= -65281;
-				color |= 0;
-				0;
-			}
-			{
-				color &= -256;
-				color |= 37;
-				37;
-			}
-			{
-				color &= 16777215;
-				color |= -16777216;
-				255;
-			}
-			$r = color;
-			return $r;
-		}($this));
-		return $r;
-	}(this)),"assets/images/next.png",$bind(this,this.onNextClick));
-	this.buttons[1].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
-		var $r;
-		var color1 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
-		$r = (function($this) {
-			var $r;
-			{
-				color1 &= -16711681;
-				color1 |= 8519680;
-				130;
-			}
-			{
-				color1 &= -65281;
-				color1 |= 0;
-				0;
-			}
-			{
-				color1 &= -256;
-				color1 |= 37;
-				37;
-			}
-			{
-				color1 &= 16777215;
-				color1 |= -16777216;
-				255;
-			}
-			$r = color1;
-			return $r;
-		}($this));
-		return $r;
-	}(this)),"assets/images/build.png",$bind(this,this.onEditClick));
-	this.buttons[2].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
-		var $r;
-		var color2 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
-		$r = (function($this) {
-			var $r;
-			{
-				color2 &= -16711681;
-				color2 |= 8519680;
-				130;
-			}
-			{
-				color2 &= -65281;
-				color2 |= 0;
-				0;
-			}
-			{
-				color2 &= -256;
-				color2 |= 37;
-				37;
-			}
-			{
-				color2 &= 16777215;
-				color2 |= -16777216;
-				255;
-			}
-			$r = color2;
-			return $r;
-		}($this));
-		return $r;
-	}(this)),"assets/images/menu.png",$bind(this,this.onMenuClick));
+	this.goalTimer = new flixel_util_FlxTimer();
 };
 $hxClasses["org.wildrabbit.ui.VictoryPopup"] = org_wildrabbit_ui_VictoryPopup;
 org_wildrabbit_ui_VictoryPopup.__name__ = ["org","wildrabbit","ui","VictoryPopup"];
 org_wildrabbit_ui_VictoryPopup.__super__ = flixel_group_FlxTypedSpriteGroup;
 org_wildrabbit_ui_VictoryPopup.prototype = $extend(flixel_group_FlxTypedSpriteGroup.prototype,{
-	onNextClick: function() {
+	update: function(dt) {
+		flixel_group_FlxTypedSpriteGroup.prototype.update.call(this,dt);
+		if(!this.init) return;
+		if(this.roachie.x > 596) {
+			this.container.remove(this.roachie);
+			this.roachie.set_moves(false);
+		} else {
+			var r = flixel_math_FlxRect.get(60,16,64,64);
+			var old = this.roachie.clipRect;
+			this.roachie.set_clipRect(r);
+			if(!r._inPool) {
+				r._inPool = true;
+				r._weak = false;
+				flixel_math_FlxRect._pool.putUnsafe(r);
+			}
+			if(old != null) {
+				if(!old._inPool) {
+					old._inPool = true;
+					old._weak = false;
+					flixel_math_FlxRect._pool.putUnsafe(old);
+				}
+			}
+		}
+	}
+	,onNextClick: function() {
 		var _g = this;
 		if(org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx >= org_wildrabbit_roach_Reg.currentWorld.levels.length - 1) {
 			if(org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx >= org_wildrabbit_roach_Reg.worlds.length - 1) flixel_FlxG.switchState(new org_wildrabbit_roach_states_EndState()); else {
@@ -66408,13 +66639,161 @@ org_wildrabbit_ui_VictoryPopup.prototype = $extend(flixel_group_FlxTypedSpriteGr
 		}});
 	}
 	,onMenuClick: function() {
-		haxe_Log.trace("Menu!",{ fileName : "VictoryPopup.hx", lineNumber : 128, className : "org.wildrabbit.ui.VictoryPopup", methodName : "onMenuClick"});
+		haxe_Log.trace("Menu!",{ fileName : "VictoryPopup.hx", lineNumber : 148, className : "org.wildrabbit.ui.VictoryPopup", methodName : "onMenuClick"});
 	}
-	,start: function() {
-		this.container.scale.set(0.25,0.25);
-		var t = flixel_tweens_FlxTween.tween(this.container.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut, onComplete : null});
-		this.bgLayer.scale.set(0.25,0.25);
-		var t1 = flixel_tweens_FlxTween.tween(this.bgLayer.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut, onComplete : null});
+	,start: function(completedObjectives) {
+		this.init = false;
+		this.popupBg.scale.set(0.25,0.25);
+		var t = flixel_tweens_FlxTween.tween(this.popupBg.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut, onComplete : $bind(this,this.onIntroAnimFinished)});
+		this.popupDeco.scale.set(0.25,0.25);
+		var t1 = flixel_tweens_FlxTween.tween(this.popupDeco.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut});
+		this.title.scale.set(0.25,0.25);
+		var t2 = flixel_tweens_FlxTween.tween(this.title.scale,{ 'x' : 1, 'y' : 1},0.35,{ type : 8, ease : flixel_tweens_FlxEase.backOut});
+		var atlas = flixel_graphics_frames_FlxAtlasFrames.fromTexturePackerJson("assets/images/ui.png","assets/images/ui.json");
+		var objStateList;
+		objStateList = ((function($this) {
+			var $r;
+			var this1 = org_wildrabbit_roach_Reg.gameWorld.worldTable.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx].levelObjectiveTable;
+			$r = this1.get(org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx);
+			return $r;
+		}(this))).objectives;
+		var _g = 0;
+		while(_g < completedObjectives.length) {
+			var i = completedObjectives[_g];
+			++_g;
+			var medalIdx = i;
+			var objState = objStateList[medalIdx];
+			var revealed = medalIdx < 2 || objState.completed || objStateList[medalIdx - 1].completed;
+			this.newGoals.push(new org_wildrabbit_ui_GoalPanel(300,400,atlas,medalIdx,org_wildrabbit_roach_Reg.currentLevel.objectives[medalIdx].getText(),revealed,false));
+		}
+	}
+	,onIntroAnimFinished: function(t) {
+		this.roachie = new flixel_FlxSprite(148,310,"assets/images/roachie_win.png");
+		this.roachie.set_moves(true);
+		this.roachie.velocity.set(256,0);
+		this.roachie.angularVelocity = 360;
+		this.container.add(this.roachie);
+		var btnStart = new flixel_math_FlxPoint(174,508);
+		var btnWidth = 146;
+		var btnHeight = 56;
+		var btnSpace = 8;
+		var _g = 0;
+		while(_g < 3) {
+			var i = _g++;
+			this.buttons.push(new org_wildrabbit_ui_ActionButton(btnStart.x,btnStart.y));
+			var _g1 = btnStart;
+			_g1.set_x(_g1.x + (btnWidth + btnSpace));
+			this.container.add(this.buttons[this.buttons.length - 1]);
+		}
+		this.buttons[0].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
+			var $r;
+			var color = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color &= -16711681;
+					color |= 8519680;
+					130;
+				}
+				{
+					color &= -65281;
+					color |= 0;
+					0;
+				}
+				{
+					color &= -256;
+					color |= 37;
+					37;
+				}
+				{
+					color &= 16777215;
+					color |= -16777216;
+					255;
+				}
+				$r = color;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/next.png",$bind(this,this.onNextClick));
+		this.buttons[1].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
+			var $r;
+			var color1 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color1 &= -16711681;
+					color1 |= 8519680;
+					130;
+				}
+				{
+					color1 &= -65281;
+					color1 |= 0;
+					0;
+				}
+				{
+					color1 &= -256;
+					color1 |= 37;
+					37;
+				}
+				{
+					color1 &= 16777215;
+					color1 |= -16777216;
+					255;
+				}
+				$r = color1;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/build.png",$bind(this,this.onEditClick));
+		this.buttons[2].build(flixel_math_FlxRect.weak(0,0,btnWidth,btnHeight),(function($this) {
+			var $r;
+			var color2 = flixel_util__$FlxColor_FlxColor_$Impl_$._new();
+			$r = (function($this) {
+				var $r;
+				{
+					color2 &= -16711681;
+					color2 |= 8388608;
+					128;
+				}
+				{
+					color2 &= -65281;
+					color2 |= 32768;
+					128;
+				}
+				{
+					color2 &= -256;
+					color2 |= 128;
+					128;
+				}
+				{
+					color2 &= 16777215;
+					color2 |= -16777216;
+					255;
+				}
+				$r = color2;
+				return $r;
+			}($this));
+			return $r;
+		}(this)),"assets/images/menu.png",$bind(this,this.onMenuClick));
+		this.init = true;
+		if(this.newGoals.length > 0 && this.currentGoal == -1) {
+			this.currentGoal = 0;
+			this.container.add(this.newGoals[this.currentGoal]);
+			this.goalTimer.start(0.2,$bind(this,this.onRevealGoal),1);
+		}
+	}
+	,onRevealGoal: function(timer) {
+		this.newGoals[this.currentGoal].setRevealed(true,true);
+		if(this.currentGoal != this.newGoals.length - 1) this.goalTimer.start(0.5,$bind(this,this.onNextGoal),1); else this.goalTimer.start(0.5,$bind(this,this.onLastGoal),1);
+	}
+	,onNextGoal: function(timer) {
+		this.container.remove(this.newGoals[this.currentGoal]);
+		this.currentGoal++;
+		this.container.add(this.newGoals[this.currentGoal]);
+		this.goalTimer.start(0.2,$bind(this,this.onRevealGoal),1);
+	}
+	,onLastGoal: function(timer) {
+		this.container.remove(this.newGoals[this.currentGoal]);
 	}
 	,__class__: org_wildrabbit_ui_VictoryPopup
 });
@@ -69719,6 +70098,7 @@ org_wildrabbit_roach_AssetPaths.tileset_entities__tsx = "assets/data/tileset_ent
 org_wildrabbit_roach_AssetPaths.world0__tmx = "assets/data/world0.tmx";
 org_wildrabbit_roach_AssetPaths.world00__json = "assets/data/world00.json";
 org_wildrabbit_roach_AssetPaths.small_text__TTF = "assets/fonts/small_text.TTF";
+org_wildrabbit_roach_AssetPaths.bg_howto__png = "assets/images/bg_howto.png";
 org_wildrabbit_roach_AssetPaths.build__png = "assets/images/build.png";
 org_wildrabbit_roach_AssetPaths.clear__png = "assets/images/clear.png";
 org_wildrabbit_roach_AssetPaths.deco_construction_bottom__png = "assets/images/deco_construction_bottom.png";
@@ -69741,7 +70121,10 @@ org_wildrabbit_roach_AssetPaths.next__png = "assets/images/next.png";
 org_wildrabbit_roach_AssetPaths.pause__png = "assets/images/pause.png";
 org_wildrabbit_roach_AssetPaths.play__png = "assets/images/play.png";
 org_wildrabbit_roach_AssetPaths.playerTrail__png = "assets/images/playerTrail.png";
+org_wildrabbit_roach_AssetPaths.popup_deco__png = "assets/images/popup_deco.png";
 org_wildrabbit_roach_AssetPaths.reset_btn__png = "assets/images/reset_btn.png";
+org_wildrabbit_roach_AssetPaths.roachie_lose__png = "assets/images/roachie_lose.png";
+org_wildrabbit_roach_AssetPaths.roachie_win__png = "assets/images/roachie_win.png";
 org_wildrabbit_roach_AssetPaths.screen_pause__png = "assets/images/screen_pause.png";
 org_wildrabbit_roach_AssetPaths.select__png = "assets/images/select.png";
 org_wildrabbit_roach_AssetPaths.start__jpg = "assets/images/start.jpg";
@@ -69776,6 +70159,30 @@ org_wildrabbit_roach_Reg.scores = [];
 org_wildrabbit_roach_Reg.score = 0;
 org_wildrabbit_roach_Reg.saves = [];
 org_wildrabbit_roach_Reg.stats = new org_wildrabbit_world_GameStats();
+org_wildrabbit_roach_states_HowtoState.START_DELAY = 0.8;
+org_wildrabbit_roach_states_HowtoState.TEXT_1 = "Hi ! I'm Roachie!";
+org_wildrabbit_roach_states_HowtoState.TEXT_2 = "I need to get here\n=>";
+org_wildrabbit_roach_states_HowtoState.TEXT_3 = "I'm fast!";
+org_wildrabbit_roach_states_HowtoState.TEXT_4 = "...and when I bump\nI always turn right";
+org_wildrabbit_roach_states_HowtoState.TEXT_5 = "...and right";
+org_wildrabbit_roach_states_HowtoState.TEXT_6 = "...and right!";
+org_wildrabbit_roach_states_HowtoState.TEXT_7 = "Getting close now\n:)";
+org_wildrabbit_roach_states_HowtoState.TEXT_8 = "Whoa!";
+org_wildrabbit_roach_states_HowtoState.TEXT_9 = "Not that way";
+org_wildrabbit_roach_states_HowtoState.TEXT_10 = ":(";
+org_wildrabbit_roach_states_HowtoState.TEXT_11 = "Guess I'm going to need your help";
+org_wildrabbit_roach_states_HowtoState.TEXT_12 = "Let's go into \"Edit mode\"";
+org_wildrabbit_roach_states_HowtoState.TEXT_13 = "See that tile?";
+org_wildrabbit_roach_states_HowtoState.TEXT_14 = "Tiles are neat!";
+org_wildrabbit_roach_states_HowtoState.TEXT_15 = "When I step on them I'll change direction";
+org_wildrabbit_roach_states_HowtoState.TEXT_16 = "Let's try again, shall we?";
+org_wildrabbit_roach_states_HowtoState.TEXT_17 = "The \"Play\" button will get me moving again";
+org_wildrabbit_roach_states_HowtoState.TEXT_18 = "Here we go!";
+org_wildrabbit_roach_states_HowtoState.TEXT_19 = "Blazing fast!";
+org_wildrabbit_roach_states_HowtoState.TEXT_20 = "Okay...let's see what happens now";
+org_wildrabbit_roach_states_HowtoState.TEXT_21 = "Yay!";
+org_wildrabbit_roach_states_HowtoState.TEXT_22 = "These are the basics, but there'll be more surprises.";
+org_wildrabbit_roach_states_HowtoState.TEXT_23 = "Get me through all the levels!";
 org_wildrabbit_roach_states_PlayState.X_OFFSET = 64;
 org_wildrabbit_roach_states_PlayState.Y_OFFSET = 64;
 org_wildrabbit_roach_states_PlayState.AWAKE_DELAY = 0.3;
