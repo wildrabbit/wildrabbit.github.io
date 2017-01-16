@@ -187,7 +187,7 @@ ApplicationMain.init = function() {
 	if(total == 0) ApplicationMain.start();
 };
 ApplicationMain.main = function() {
-	ApplicationMain.config = { build : "1560", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
+	ApplicationMain.config = { build : "1615", company : "ith1ldin", file : "RoachEscape", fps : 60, name : "RoachEscape", orientation : "portrait", packageName : "org.wildrabbit.roach", version : "0.0.1", windows : [{ antialiasing : 0, background : 0, borderless : false, depthBuffer : false, display : 0, fullscreen : false, hardware : false, height : 768, parameters : "{}", resizable : true, stencilBuffer : true, title : "RoachEscape", vsync : true, width : 1024, x : null, y : null}]};
 };
 ApplicationMain.start = function() {
 	var hasMain = false;
@@ -64794,11 +64794,21 @@ org_wildrabbit_world_GameWorldState.prototype = {
 		}
 		this.saveFile.data.worldTable = saveTable;
 		this.saveFile.flush();
+		this.saveFile.close();
 	}
 	,clearSave: function() {
+		var _g = this;
 		this.saveFile.bind("RoachEscape.sav");
-		this.saveFile.erase();
-		this.saveFile.flush();
+		haxe_Log.trace(this.saveFile.data,{ fileName : "GameWorldState.hx", lineNumber : 172, className : "org.wildrabbit.world.GameWorldState", methodName : "clearSave"});
+		new flixel_util_FlxTimer().start(1,(function($this) {
+			var $r;
+			var clear = function(t) {
+				_g.saveFile.erase();
+				_g.saveFile.close();
+			};
+			$r = clear;
+			return $r;
+		}(this)));
 	}
 	,__class__: org_wildrabbit_world_GameWorldState
 	,__properties__: {get_totalStars:"get_totalStars"}
@@ -65104,7 +65114,6 @@ org_wildrabbit_roach_states_HowtoState.prototype = $extend(flixel_FlxState.proto
 		this.seqTimer.start(0.8,$bind(this,this.finishHowto));
 	}
 	,finishHowto: function(t) {
-		org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx = org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx = 0;
 		org_wildrabbit_roach_Reg.currentWorld = org_wildrabbit_roach_Reg.worldDatabase.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx];
 		org_wildrabbit_roach_Reg.currentLevel = org_wildrabbit_roach_Reg.currentWorld.levels[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
 		flixel_FlxG.sound.play("assets/sounds/play.wav");
@@ -65144,9 +65153,6 @@ org_wildrabbit_roach_states_MenuState.prototype = $extend(flixel_FlxState.protot
 				this.add(this.continueText);
 			}
 			if(flixel_FlxG.keys.justPressed.get_ANY() || flixel_FlxG.mouse._leftButton.current == 2) {
-				org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx = org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx = 0;
-				org_wildrabbit_roach_Reg.currentWorld = org_wildrabbit_roach_Reg.worldDatabase.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx];
-				org_wildrabbit_roach_Reg.currentLevel = org_wildrabbit_roach_Reg.currentWorld.levels[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
 				flixel_FlxG.sound.play("assets/sounds/play.wav");
 				flixel_FlxG.switchState(new org_wildrabbit_roach_states_HowtoState());
 			}
@@ -65709,6 +65715,7 @@ org_wildrabbit_roach_states_PlayState.prototype = $extend(flixel_FlxState.protot
 		var this1 = org_wildrabbit_roach_Reg.gameWorld.worldTable.h[org_wildrabbit_roach_Reg.gameWorld.currentWorldIdx].levelObjectiveTable;
 		this1.set(org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx,levelState);
 		levelState;
+		org_wildrabbit_roach_Reg.gameWorld.save();
 		flixel_FlxG.switchState(new org_wildrabbit_roach_states_PlayState());
 	}
 	,__class__: org_wildrabbit_roach_states_PlayState
@@ -66626,20 +66633,36 @@ org_wildrabbit_ui_VictoryPopup.prototype = $extend(flixel_group_FlxTypedSpriteGr
 			org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx++;
 			org_wildrabbit_roach_Reg.currentLevel = org_wildrabbit_roach_Reg.currentWorld.levels[org_wildrabbit_roach_Reg.gameWorld.currentLevelIdx];
 		}
-		flixel_tweens_FlxTween.tween(this.scale,{ x : 0, y : 0},0.25,{ ease : flixel_tweens_FlxEase.backIn, onComplete : function(t) {
+		if(this.newGoals.length > 0) this.container.remove(this.newGoals[this.currentGoal]);
+		var _g1 = 0;
+		var _g11 = this.buttons;
+		while(_g1 < _g11.length) {
+			var button = _g11[_g1];
+			++_g1;
+			this.container.remove(button);
+		}
+		flixel_tweens_FlxTween.tween(this.scale,{ x : 0, y : 0},0.5,{ ease : flixel_tweens_FlxEase.backIn, onComplete : function(t) {
 			_g.destroy();
 			flixel_FlxG.switchState(new org_wildrabbit_roach_states_PlayState());
 		}});
 	}
 	,onEditClick: function() {
 		var _g = this;
-		flixel_tweens_FlxTween.tween(this.scale,{ x : 0, y : 0},0.15,{ ease : flixel_tweens_FlxEase.backIn, onComplete : function(t) {
+		if(this.newGoals.length > 0) this.container.remove(this.newGoals[this.currentGoal]);
+		var _g1 = 0;
+		var _g11 = this.buttons;
+		while(_g1 < _g11.length) {
+			var button = _g11[_g1];
+			++_g1;
+			this.container.remove(button);
+		}
+		flixel_tweens_FlxTween.tween(this.scale,{ x : 0, y : 0},0.5,{ ease : flixel_tweens_FlxEase.backIn, onComplete : function(t) {
 			_g.destroy();
 			(js_Boot.__cast(flixel_FlxG.game._state , org_wildrabbit_roach_states_PlayState)).setStageMode(org_wildrabbit_roach_states_StageMode.EDIT);
 		}});
 	}
 	,onMenuClick: function() {
-		haxe_Log.trace("Menu!",{ fileName : "VictoryPopup.hx", lineNumber : 148, className : "org.wildrabbit.ui.VictoryPopup", methodName : "onMenuClick"});
+		haxe_Log.trace("Menu!",{ fileName : "VictoryPopup.hx", lineNumber : 160, className : "org.wildrabbit.ui.VictoryPopup", methodName : "onMenuClick"});
 	}
 	,start: function(completedObjectives) {
 		this.init = false;
@@ -66775,25 +66798,42 @@ org_wildrabbit_ui_VictoryPopup.prototype = $extend(flixel_group_FlxTypedSpriteGr
 			}($this));
 			return $r;
 		}(this)),"assets/images/menu.png",$bind(this,this.onMenuClick));
+		var hasGoals = this.newGoals.length > 0 && this.currentGoal == -1;
+		var _g2 = 0;
+		var _g11 = this.buttons;
+		while(_g2 < _g11.length) {
+			var button = _g11[_g2];
+			++_g2;
+			button.set_visible(!hasGoals);
+			button.set_active(!hasGoals);
+		}
 		this.init = true;
-		if(this.newGoals.length > 0 && this.currentGoal == -1) {
+		if(hasGoals) {
 			this.currentGoal = 0;
 			this.container.add(this.newGoals[this.currentGoal]);
-			this.goalTimer.start(0.2,$bind(this,this.onRevealGoal),1);
+			this.goalTimer.start(0.5,$bind(this,this.onRevealGoal),1);
 		}
 	}
 	,onRevealGoal: function(timer) {
 		this.newGoals[this.currentGoal].setRevealed(true,true);
-		if(this.currentGoal != this.newGoals.length - 1) this.goalTimer.start(0.5,$bind(this,this.onNextGoal),1); else this.goalTimer.start(0.5,$bind(this,this.onLastGoal),1);
+		if(this.currentGoal != this.newGoals.length - 1) this.goalTimer.start(1,$bind(this,this.onNextGoal),1); else this.goalTimer.start(1,$bind(this,this.onLastGoal),1);
 	}
 	,onNextGoal: function(timer) {
 		this.container.remove(this.newGoals[this.currentGoal]);
 		this.currentGoal++;
 		this.container.add(this.newGoals[this.currentGoal]);
-		this.goalTimer.start(0.2,$bind(this,this.onRevealGoal),1);
+		this.goalTimer.start(0.5,$bind(this,this.onRevealGoal),1);
 	}
 	,onLastGoal: function(timer) {
 		this.container.remove(this.newGoals[this.currentGoal]);
+		var _g = 0;
+		var _g1 = this.buttons;
+		while(_g < _g1.length) {
+			var button = _g1[_g];
+			++_g;
+			button.set_visible(true);
+			button.set_active(true);
+		}
 	}
 	,__class__: org_wildrabbit_ui_VictoryPopup
 });
