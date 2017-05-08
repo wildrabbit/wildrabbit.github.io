@@ -1,5 +1,5 @@
 {
-"TOTAL_MEMORY": 536870912,
+"TOTAL_MEMORY": 402653184,
 "dataUrl": "webgl.data.unityweb",
 "wasmCodeUrl": "webgl.wasm.code.unityweb",
 "wasmFrameworkUrl": "webgl.wasm.framework.unityweb",
