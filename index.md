@@ -1,8 +1,5 @@
 ---
 layout: default
-title: StealthCoder's dusty chest of projects.
-description: Past and present LD entries, plus some pet projects.
-show_downloads: "false"
 ---
 
 # StealthCoder's dusty chest of projects.
