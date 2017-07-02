@@ -24,6 +24,6 @@ Besides the LD entries, smaller demos will also be listed here.
 
 ## [](#demo) Demo projects
 
-* [Cavegen!](wildrabbit.github.io/cavegen) This is my demo project for the first FemDevs' programming challenge. The theme was *procedural map generation*.
+* [Cavegen!](http://wildrabbit.github.io/cavegen) This is my demo project for the first FemDevs' programming challenge. The theme was *procedural map generation*.
 
 [View my full portfolio on Tumblr](http://stealthcoder.tumblr.com)
