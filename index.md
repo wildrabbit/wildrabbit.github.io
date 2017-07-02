@@ -1,8 +1,11 @@
 ---
 layout: default
+title: StealthCoder's dusty chest of projects.
+description: Past and present LD entries, plus some pet projects.
+show_downloads: "false"
 ---
 
-## StealthCoder's dusty chest of projects.
+# StealthCoder's dusty chest of projects.
 
 Hi! This is **stealthcoder**, (**wildrabbit** in the GitHub-verse, **Ithildin** at the LD sites, and a couple others here and there). This page will list past browser-based Ludum Dare entries (or the original compo versions for more recent ones where I've continued development). Since Dropbox stopped rendering static HTML I've had to migrate old web builds. At the beginning I'd also considered [Itch.io](http://ithildin.itch.io), where I'm already hosting my most recent entries, but these past projects are a bit dated and could use some work first before adding them there.
 
