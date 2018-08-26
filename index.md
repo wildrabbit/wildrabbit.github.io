@@ -21,6 +21,7 @@ Besides the LD entries, smaller demos will also be listed here.
 * [LD 35 - Getting Shifty (compo)](ld35/index.html)
 * [LD 37 - Roach Escape (compo)](ld37_compo/index.html)
 * [LD 38 - Tooth Decay](ld38_compo/index.html)
+* [LD 42 - Stepping Stones (post compo)](ld42/index.html)
 
 ## [](#demo) Demo projects
 
