@@ -2,19 +2,36 @@
 <html lang="en-us">
   <head>
   <style>
-    body {
-        background-color: #3f2832;
-    }
-	#border{
-		background-color:#e4a672;
-	}
-	ul{
-		color:#e53b44
-	}
-    a 
-	{
-        color: #e53b44;
-    }
+body
+{
+  background-color: #3f2832;
+}
+
+#unityContainer
+{
+	display: inline-block;
+	width: 640px; height: 480px;
+}
+
+#border
+{
+	display: table-cell;
+    width: 680px;
+    height: 520px;
+    vertical-align: middle;
+    text-align: center;
+	background-color:#e4a672;
+}
+
+ul
+{
+	color:#e53b44
+}
+
+a
+{
+	color: #e53b44;
+}
 </style>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -25,7 +42,7 @@
     </script>
   </head>
   <body>
-	<div id="border" style="width: 680px; height: 520px; margin: auto">
+	<div id="border">
 		<div id="unityContainer" style="width: 640px; height: 480px; margin: auto"></div>
 	</div>
 	<ul>
